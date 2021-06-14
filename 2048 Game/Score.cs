@@ -40,7 +40,7 @@ namespace _2048_Game
 
         public void writeBestScore()
         {
-            using (StreamWriter streamWriter = new StreamWriter("BestScore.txt"))
+            using (StreamWriter streamWriter = new StreamWriter("../../BestScore.txt"))
             {
                 streamWriter.Write(bestScore.ToString());
                 streamWriter.Flush();
@@ -49,10 +49,10 @@ namespace _2048_Game
 
         private void takeBestScore()
         {
-            using (StreamReader read = new StreamReader("BestScore.txt"))
+            using (StreamReader read = new StreamReader("../../BestScore.txt"))
             {
                 string textRow = "";
-                if (new FileInfo("BestScore.txt").Length > 0)
+                if (new FileInfo("../../BestScore.txt").Length > 0)
                 {
                     textRow = read.ReadLine();
                     bestScore = int.Parse(textRow);
