@@ -18,17 +18,11 @@ namespace _2048_Game
         public bool isZeroValue()
         {
             return (value == 0);
-
         }
 
         public void setZeroValue()
         {
             value = 0;
-        }
-
-        public void setFirstValue()
-        {
-            value = 2;
         }
 
         public void setValue(int givenValue)
@@ -39,11 +33,6 @@ namespace _2048_Game
         public int getValue()
         {
             return value;
-        }
-
-        public void toDoubleValue()
-        {
-            value *= 2;
         }
     }
 }

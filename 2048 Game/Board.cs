@@ -137,7 +137,7 @@ namespace _2048_Game
             bool occupied = false;
             for (int rows = 0; rows < SIZE; rows++)
             {
-                bool columnOccupied = false;
+                bool columnOccupied;
                 do
                 {
                     columnOccupied = false;
@@ -159,7 +159,8 @@ namespace _2048_Game
         public bool moveCellsDown()
         {
             bool occupied = false;
-            if (moveCellsDownLoop()) occupied = true;
+            if (moveCellsDownLoop()) 
+                occupied = true;
             for (int rows = 0; rows < SIZE; rows++)
             {
                 for (int columns = SIZE - 1; columns > 0; columns--)
@@ -168,7 +169,8 @@ namespace _2048_Game
                     occupied = combineCells(rows, columnsPlus, rows, columns, occupied);
                 }
             }
-            if (moveCellsDownLoop()) occupied = true;
+            if (moveCellsDownLoop()) 
+                occupied = true;
             return occupied;
         }
 
@@ -177,7 +179,7 @@ namespace _2048_Game
             bool occupied = false;
             for (int rows = 0; rows < SIZE; rows++)
             {
-                bool columnOccupied = false;
+                bool columnOccupied;
                 do
                 {
                     columnOccupied = false;
@@ -199,7 +201,8 @@ namespace _2048_Game
         public bool moveCellsLeft()
         {
             bool occupied = false;
-            if (moveCellsLeftLoop()) occupied = true;
+            if (moveCellsLeftLoop()) 
+                occupied = true;
             for (int columns = 0; columns < SIZE; columns++)
             {
                 for (int rows = 0; rows < (SIZE - 1); rows++)
@@ -208,7 +211,8 @@ namespace _2048_Game
                     occupied = combineCells(rowsPlus, columns, rows, columns, occupied);
                 }
             }
-            if (moveCellsLeftLoop()) occupied = true;
+            if (moveCellsLeftLoop()) 
+                occupied = true;
             return occupied;
         }
 
@@ -217,7 +221,7 @@ namespace _2048_Game
             bool occupied = false;
             for (int columns = 0; columns < SIZE; columns++)
             {
-                bool rowOccupied = false;
+                bool rowOccupied;
                 do
                 {
                     rowOccupied = false;
@@ -239,7 +243,8 @@ namespace _2048_Game
         public bool moveCellsRight()
         {
             bool occupied = false;
-            if (moveCellsRightLoop()) occupied = true;
+            if (moveCellsRightLoop()) 
+                occupied = true;
             for (int columns = 0; columns < SIZE; columns++)
             {
                 for (int rows = (SIZE - 1); rows > 0; rows--)
@@ -248,7 +253,8 @@ namespace _2048_Game
                     occupied = combineCells(rowsPlus, columns, rows, columns, occupied);
                 }
             }
-            if (moveCellsRightLoop()) occupied = true;
+            if (moveCellsRightLoop()) 
+                occupied = true;
             return occupied;
         }
 
@@ -257,7 +263,7 @@ namespace _2048_Game
             bool occupied = false;
             for (int columns = 0; columns < SIZE; columns++)
             {
-                bool rowOccupied = false;
+                bool rowOccupied;
                 do
                 {
                     rowOccupied = false;
@@ -276,8 +282,7 @@ namespace _2048_Game
             return occupied;
         }
 
-        private bool combineCells(int x1, int y1, int x2, int y2,
-                bool occupied)
+        private bool combineCells(int x1, int y1, int x2, int y2, bool occupied)
         {
             if (!gameBoard[x1, y1].isZeroValue())
             {

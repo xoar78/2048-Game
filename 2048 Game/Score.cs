@@ -19,16 +19,6 @@ namespace _2048_Game
             resetScore();
         }
 
-        public int getScore()
-        {
-            return score;
-        }
-
-        public int getBestScore()
-        {
-            return bestScore;
-        }
-
         public bool isScoreTheBest()
         {
             if (score > bestScore)

@@ -14,6 +14,7 @@ namespace _2048_Game
     {
         Board board;
         Score score;
+        bool flag = false;
         public GameBoard()
         {
             InitializeComponent();
@@ -90,6 +91,10 @@ namespace _2048_Game
                     control.BackColor = ColorTranslator.FromHtml("#0033ff");
                     control.ForeColor = Color.White;
                     break;
+                default:
+                    control.BackColor = ColorTranslator.FromHtml("#1dcf61");
+                    control.ForeColor = Color.White;
+                    break;
             }
         }
 
@@ -162,9 +167,10 @@ namespace _2048_Game
                 else if (board.isGameOver())
                     gameOver();
             }
-            if (board.takeBiggestCell() == 2048)
+            if (board.takeBiggestCell() == 2048 && !flag)
             {
-                gameOver();
+                win();
+                flag = true;
             }
             score.updateScore(board.getScoreValue());
             score.printBestScore(bestScoreLabel);
@@ -175,13 +181,32 @@ namespace _2048_Game
                 score.printBestScore(bestScoreLabel);
                 score.writeBestScore();
             }
-
         }
 
+        private void win()
+        {
+            DialogResult dialogResult = MessageBox.Show("You win! Do you want to continue?", "Win", MessageBoxButtons.YesNo);
+            if (score.isScoreTheBest())
+            {
+                score.updateBestScore();
+                score.printBestScore(bestScoreLabel);
+                score.writeBestScore();
+            }
+            if (dialogResult == DialogResult.Yes)
+                return;
+            else
+            {
+                score.resetScore();
+                score.printScore(scoreLabel);
+                board.resetBoard();
+                drawBoard();
+            }
+            
+        }
 
         private void gameOver()
         {
-            MessageBox.Show("Game over !");
+            MessageBox.Show("Game over!");
             if (score.isScoreTheBest())
             {
                 score.updateBestScore();
@@ -196,15 +221,9 @@ namespace _2048_Game
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Reset the game ?", "Reset", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Reset the game?", "Reset", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                if (score.isScoreTheBest())
-                {
-                    score.updateBestScore();
-                    score.printBestScore(bestScoreLabel);
-                    score.writeBestScore();
-                }
                 score.resetScore();
                 score.printScore(scoreLabel);
                 board.resetBoard();
@@ -212,6 +231,40 @@ namespace _2048_Game
             }
         }
 
-        
+        private void backToMenu()
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want to back to menu?\nYour game won't be saved.", "Menu", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MainMenu menu = new MainMenu();
+                menu.Show();
+                this.Close();
+            }
+        }
+
+        private void changeToColorNG(object sender, EventArgs e)
+        {
+            buttonReset.BackColor = Color.FromArgb(168, 131, 61);
+        }
+
+        private void changeToDefNG(object sender, EventArgs e)
+        {
+            buttonReset.BackColor = Color.White;
+        }
+
+        private void buttonMenu_Click(object sender, EventArgs e)
+        {
+            backToMenu();
+        }
+
+        private void changeToColorBM(object sender, EventArgs e)
+        {
+            buttonMenu.BackColor = Color.FromArgb(168, 131, 61);
+        }
+
+        private void changeToDefBM(object sender, EventArgs e)
+        {
+            buttonMenu.BackColor = Color.White;
+        }
     }
 }
